@@ -63,6 +63,36 @@ const topBikes = [
 export default function Index() {
   const [activeTab, setActiveTab] = useState('feed');
 
+  const mockRiderProfile = {
+    name: 'Михаил Петров',
+    nickname: 'Михаил "Буря"',
+    avatar: 'https://cdn.poehali.dev/projects/a6ddbe3e-a918-4c0e-80fe-11ceca80cc36/files/90aeac36-8cb2-44f1-bf68-c82f1f6ad610.jpg',
+    rating: 4.9,
+    level: 28,
+    levelProgress: 67,
+    stats: {
+      totalRides: 456,
+      totalKm: 42830,
+      avgSpeed: 87,
+      topSpeed: 264,
+      nightRides: 89,
+      groupRides: 134
+    },
+    achievements: [
+      { id: 1, icon: '🏁', name: 'Первый старт', description: 'Первая поездка', unlocked: true },
+      { id: 2, icon: '⚡', name: 'Скоростной', description: '200+ км/ч', unlocked: true },
+      { id: 3, icon: '🌙', name: 'Ночной волк', description: '50 ночных рейдов', unlocked: true },
+      { id: 4, icon: '🛣️', name: 'Марафонец', description: '10000 км', unlocked: true },
+      { id: 5, icon: '👥', name: 'Командный игрок', description: '100 групповых поездок', unlocked: true },
+      { id: 6, icon: '🏆', name: 'Чемпион', description: 'Победа в соревнованиях', unlocked: true },
+      { id: 7, icon: '🔥', name: 'Легенда', description: '500 поездок', unlocked: false },
+      { id: 8, icon: '💎', name: 'Мастер', description: 'Рейтинг 5.0', unlocked: false }
+    ],
+    bikeModel: 'Harley-Davidson Iron 883',
+    bikeRating: 4.9,
+    memberSince: 'Янв 2022'
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
