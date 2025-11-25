@@ -97,10 +97,20 @@ export default function Index() {
             </Button>
           </nav>
 
-          <Avatar className="cursor-pointer ring-2 ring-primary">
-            <AvatarImage src="https://cdn.poehali.dev/projects/a6ddbe3e-a918-4c0e-80fe-11ceca80cc36/files/90aeac36-8cb2-44f1-bf68-c82f1f6ad610.jpg" />
-            <AvatarFallback>МП</AvatarFallback>
-          </Avatar>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Avatar className="cursor-pointer ring-2 ring-primary hover:ring-primary/70 transition-all">
+                <AvatarImage src="https://cdn.poehali.dev/projects/a6ddbe3e-a918-4c0e-80fe-11ceca80cc36/files/90aeac36-8cb2-44f1-bf68-c82f1f6ad610.jpg" />
+                <AvatarFallback>МП</AvatarFallback>
+              </Avatar>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl">Профиль райдера</DialogTitle>
+              </DialogHeader>
+              <RiderProfile {...mockRiderProfile} />
+            </DialogContent>
+          </Dialog>
         </div>
       </header>
 
@@ -203,25 +213,43 @@ export default function Index() {
 
                 <TabsContent value="riders" className="space-y-3 mt-4">
                   {topRiders.map((rider, index) => (
-                    <div
-                      key={rider.name}
-                      className="flex items-center gap-3 p-3 bg-background/50 rounded hover:bg-background/70 transition-colors cursor-pointer"
-                    >
-                      <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-primary/20 font-bold text-primary">
-                        {index + 1}
-                      </div>
-                      <Avatar className="h-10 w-10 ring-2 ring-primary/50">
-                        <AvatarFallback className="bg-primary/20">{rider.avatar}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm truncate">{rider.name}</p>
-                        <p className="text-xs text-muted-foreground">{rider.rides} поездок</p>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Icon name="Star" size={16} className="text-primary fill-primary" />
-                        <span className="font-bold text-sm">{rider.rating.toFixed(1)}</span>
-                      </div>
-                    </div>
+                    <Dialog key={rider.name}>
+                      <DialogTrigger asChild>
+                        <div
+                          className="flex items-center gap-3 p-3 bg-background/50 rounded hover:bg-background/70 transition-colors cursor-pointer"
+                        >
+                          <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-primary/20 font-bold text-primary">
+                            {index + 1}
+                          </div>
+                          <Avatar className="h-10 w-10 ring-2 ring-primary/50">
+                            <AvatarFallback className="bg-primary/20">{rider.avatar}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-semibold text-sm truncate">{rider.name}</p>
+                            <p className="text-xs text-muted-foreground">{rider.rides} поездок</p>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Icon name="Star" size={16} className="text-primary fill-primary" />
+                            <span className="font-bold text-sm">{rider.rating.toFixed(1)}</span>
+                          </div>
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                        <DialogHeader>
+                          <DialogTitle className="text-2xl">Профиль райдера</DialogTitle>
+                        </DialogHeader>
+                        <RiderProfile 
+                          {...mockRiderProfile}
+                          name={rider.name.split('"')[0].trim()}
+                          nickname={rider.name}
+                          rating={rider.rating}
+                          stats={{
+                            ...mockRiderProfile.stats,
+                            totalRides: rider.rides
+                          }}
+                        />
+                      </DialogContent>
+                    </Dialog>
                   ))}
                 </TabsContent>
 
